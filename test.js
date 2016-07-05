@@ -1,43 +1,5 @@
 var aTest = angular.module('testApp', ['customHtmlLabel']);
 aTest.controller("testController", ["$tableOptions", "$formOptions", "$layerOptions", "$scope", "$http", function ($tableOptions, $formOptions, $layerOptions, $scope, $http) {
-   
-	$scope.testPost = function () {
-        $http.post('uri', {"value": "test post to server"})
-            .success(function (data, code) {
-                alert("data::" + JSON.stringify(data));
-            })
-            .error(function (response, code, headers, config) {
-                alert("post失败!");
-            });
-    };
-    $scope.testGet = function () {
-        $http.get('uri?getId=232')
-            .success(function (data, code) {
-                alert("data::" + JSON.stringify(data));
-            })
-            .error(function (response, code, headers, config) {
-                alert("get失败!");
-            });
-    };
-    $scope.testPut = function () {
-        $http.put('uri', {"value": "test put to server"})
-            .success(function (data, code) {
-                alert("data::" + JSON.stringify(data));
-            })
-            .error(function (response, code, headers, config) {
-                alert("put失败!");
-            });
-    };
-    $scope.testDelete = function () {
-        $http.delete('uri?deleteId=232')
-            .success(function (data, code) {
-                alert("data::" + JSON.stringify(data));
-            })
-            .error(function (response, code, headers, config) {
-                alert("delete失败!");
-            });
-    };
-
     $scope.changeWise = function() {
         $tableOptions.changeWise();
     };
@@ -51,8 +13,8 @@ aTest.controller("testController", ["$tableOptions", "$formOptions", "$layerOpti
     $scope.$on("layerDelete", function(event, data) {
         alert("layerDelete" + JSON.stringify(data));
     });  
-
-    $scope.load = function() {
+   
+	$scope.$watch('$viewContentLoaded', function() {
         //* 我们自定义了2种标签:html-table和html-form
         //* html-table以表格的方式展示json格式的数据,
         //* html-form以表格的方式编辑json格式的数据.
@@ -137,7 +99,7 @@ aTest.controller("testController", ["$tableOptions", "$formOptions", "$layerOpti
 
         $layerOptions.addButton("提交", "layerSubmit", "3");
         $layerOptions.addButton("删除", "layerDelete", "2");
-    };
+	});
 
     // 以下均为测试数据
 

@@ -16,7 +16,7 @@
 	<div class="container">
 		<div ng-app="testApp" ng-controller="testController">
 			<html-layer></html-layer>
-			<div align="center" data-ng-init="load()">
+			<div align="center">
 				<button ng-click="changeWise()" class="btn btn-primary radius">横纵翻转</button>
 				<a type="button" href="javascript:location.replace(location.href);" class="btn btn-success radius">刷新</a>
 			</div>
@@ -27,15 +27,6 @@
 			<div align="center">
 				(表单样式)
 				<html-form></html-form>
-			</div>
-			<div align="center">
-				<span>附:一般页面展示的内容,都是从服务器取到的,最后,这里附赠点REST通讯示例代码</span>
-			</div>
-			<div align="center">
-				<button ng-click="testGet()" class="btn btn-success radius">GET</button>
-				<button ng-click="testPost()" class="btn btn-warning radius">POST</button>
-				<button ng-click="testPut()" class="btn btn-primary radius">PUT</button>
-				<button ng-click="testDelete()" class="btn btn-danger radius">DELETE</button>
 			</div>
 		</div>
 	</div>

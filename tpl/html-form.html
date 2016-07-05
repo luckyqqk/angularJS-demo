@@ -1,0 +1,144 @@
+
+<div align="center">
+    <table class="table table-border table-bordered radius table-striped table-hover" align="center" ng-show="$tableOptions.showType == 0">
+        <tr>
+            <td ng-repeat = "option in $formOptions.options" align="center">
+                <b>{{option.label}}</b>
+            </td>
+        </tr>
+        <tr ng-repeat="data in $formOptions.data">
+            <td ng-repeat = "filed in $formOptions.options" align="center">
+                <div ng-switch="filed.htmlType">
+                    <div ng-switch-default="">
+                        <div>{{data[filed.dataKey]}}</div>
+                    </div>
+
+                    <div ng-switch-when="text">
+                        <input type="text" ng-model="data[filed.dataKey]" />
+                    </div>
+
+                    <div ng-switch-when="textarea">
+                        <textarea ng-model="data[filed.dataKey]" >{{data[filed.dataKey]}}</textarea>
+                    </div>
+
+                    <div ng-switch-when="email">
+                        <input type="email" ng-model="data[filed.dataKey]" />
+                    </div>
+
+                    <div ng-switch-when="url">
+                        <input type="url" ng-model="data[filed.dataKey]" />
+                    </div>
+
+                    <div ng-switch-when="checkbox">
+                        <label ng-repeat="box in filed.sonOptions">
+                            {{box.name}}
+                            <input type="checkbox" value="box.value"
+                                   ng-checked="isChecked($parent.data[filed.dataKey], box.value)"
+                                   ng-click="boxClick($parent.data[filed.dataKey], box.value)"
+                                    />
+                        </label>
+                    </div>
+
+                    <div ng-switch-when="radio">
+                        <div ng-repeat="sonRadio in filed.sonOptions">
+                            <label> {{sonRadio.name}}
+                                <input type="radio" ng-model="$parent.data[filed.dataKey]" value="{{sonRadio.value}}"/>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!--暂不支持file-->
+                    <!--<div ng-switch-when="file">-->
+                    <!--<input type="file" ng-model="data[filed.dataKey]" />-->
+                    <!--</div>-->
+
+                    <div ng-switch-when="select">
+                        <select ng-model="data[filed.dataKey]" ng-options="v.value as v.name for v in filed.sonOptions"></select>
+                    </div>
+                    <div ng-switch-when="b">
+                        <b>{{data[filed.dataKey]}}</b>
+                    </div>
+                    <div ng-switch-when="i">
+                        <i>{{data[filed.dataKey]}}</i>
+                    </div>
+                    <div ng-switch-when="u">
+                        <u>{{data[filed.dataKey]}}</u>
+                    </div>
+                    <div ng-switch-when="p">
+                        <p>{{data[filed.dataKey]}}</p>
+                    </div>
+
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <table class="table table-border table-bordered radius table-striped table-hover" align="center" ng-hide="$tableOptions.showType == 0">
+        <tr ng-repeat = "filed in $formOptions.options">
+            <td align="center"><b>{{filed.label}}</b></td>
+            <td ng-repeat="data in $formOptions.data">
+                <div ng-switch="filed.htmlType">
+                    <div ng-switch-default="">
+                        <div>{{data[filed.dataKey]}}</div>
+                    </div>
+
+                    <div ng-switch-when="text">
+                        <input type="text" ng-model="data[filed.dataKey]" />
+                    </div>
+
+                    <div ng-switch-when="textarea">
+                        <textarea ng-model="data[filed.dataKey]" >{{data[filed.dataKey]}}</textarea>
+                    </div>
+
+                    <div ng-switch-when="email">
+                        <input type="email" ng-model="data[filed.dataKey]" />
+                    </div>
+
+                    <div ng-switch-when="url">
+                        <input type="url" ng-model="data[filed.dataKey]" />
+                    </div>
+
+                    <div ng-switch-when="checkbox">
+                        <label ng-repeat="box in filed.sonOptions">
+                            {{box.name}}
+                            <input type="checkbox" value="box.value"
+                                   ng-checked="isChecked($parent.data[filed.dataKey], box.value)"
+                                   ng-click="boxClick($parent.data[filed.dataKey], box.value)"
+                                    />
+                        </label>
+                    </div>
+
+                    <div ng-switch-when="radio">
+                        <div ng-repeat="sonRadio in filed.sonOptions">
+                            <label> {{sonRadio.name}}
+                                <input type="radio" ng-model="$parent.data[filed.dataKey]" value="{{sonRadio.value}}"/>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!--暂不支持file-->
+                    <!--<div ng-switch-when="file">-->
+                    <!--<input type="file" ng-model="data[filed.dataKey]" />-->
+                    <!--</div>-->
+
+                    <div ng-switch-when="select">
+                        <select ng-model="data[filed.dataKey]" ng-options="v.value as v.name for v in filed.sonOptions"></select>
+                    </div>
+                    <div ng-switch-when="b">
+                        <b>{{data[filed.dataKey]}}</b>
+                    </div>
+                    <div ng-switch-when="i">
+                        <i>{{data[filed.dataKey]}}</i>
+                    </div>
+                    <div ng-switch-when="u">
+                        <u>{{data[filed.dataKey]}}</u>
+                    </div>
+                    <div ng-switch-when="p">
+                        <p>{{data[filed.dataKey]}}</p>
+                    </div>
+
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>

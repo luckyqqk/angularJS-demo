@@ -1,0 +1,93 @@
+<div class="container" align="center">
+
+    <table class="table table-border table-bordered radius table-striped table-hover" align="center" ng-show="$tableOptions.showType == 0">
+        <tr>
+            <td ng-repeat = "option in $tableOptions.options" align="center">
+                <b>{{option.label}}</b>
+            </td>
+        </tr>
+        <tr ng-repeat="data in $tableOptions.data" ng-dblclick="catchIndex($index)">
+            <td ng-repeat = "filed in $tableOptions.options" align="center">
+                <div ng-switch="filed.htmlType">
+                    <div ng-switch-default="">
+                        <div>{{data[filed.dataKey]}}</div>
+                    </div>
+                    <div ng-switch-when="a">
+                        <a href="{{data[filed.dataKey]}}" target="_blank">{{data[filed.dataKey]}}</a>
+                    </div>
+                    <div ng-switch-when="img">
+                        <a href="{{data[filed.dataKey]}}" target="_blank" >查看图片</a>
+                    </div>
+                    <div ng-switch-when="checkbox">
+                        <div>{{getNames(filed.sonOptions, data[filed.dataKey])}}</div>
+                    </div>
+
+                    <div ng-switch-when="radio">
+                        <div>{{getName(filed.sonOptions, data[filed.dataKey])}}</div>
+                    </div>
+
+                    <!--暂不支持file-->
+                    <!--<div ng-switch-when="file">-->
+                    <!--<input type="file" ng-model="data[filed.dataKey]" />-->
+                    <!--</div>-->
+
+                    <div ng-switch-when="select">
+                        <div>{{getName(filed.sonOptions, data[filed.dataKey])}}</div>
+                    </div>
+                    <div ng-switch-when="b">
+                        <b>{{data[filed.dataKey]}}</b>
+                    </div>
+                    <div ng-switch-when="i">
+                        <i>{{data[filed.dataKey]}}</i>
+                    </div>
+                    <div ng-switch-when="u">
+                        <u>{{data[filed.dataKey]}}</u>
+                    </div>
+                    <div ng-switch-when="p">
+                        <p>{{data[filed.dataKey]}}</p>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <table class="table table-border table-bordered radius table-striped table-hover" align="center" ng-hide="$tableOptions.showType == 0">
+        <tr ng-repeat="filed in $tableOptions.options" align="center">
+            <td><b>{{filed.label}}</b></td>
+            <td ng-repeat="data in $tableOptions.data" align="center" ng-dblclick="catchIndex($index)">
+                <div ng-switch="option.htmlType">
+                    <div ng-switch-default="">
+                        <div>{{data[filed.dataKey]}}</div>
+                    </div>
+                    <div ng-switch-when="a">
+                        <a href="{{data[filed.dataKey]}}" target="_blank">{{data[filed.dataKey]}}</a>
+                    </div>
+                    <div ng-switch-when="img">
+                        <a href="{{data[filed.dataKey]}}" target="_blank" >查看图片h-table1</a>
+                    </div>
+                    <div ng-switch-when="checkbox">
+                        <div>{{getNames(filed.sonOptions, data[filed.dataKey])}}</div>
+                    </div>
+
+                    <div ng-switch-when="radio">
+                        <div>{{getName(filed.sonOptions, data[filed.dataKey])}}</div>
+                    </div>
+                    <div ng-switch-when="select">
+                        <div>{{getName(filed.sonOptions, data[filed.dataKey])}}</div>
+                    </div>
+                    <div ng-switch-when="b">
+                        <b>{{data[filed.dataKey]}}</b>
+                    </div>
+                    <div ng-switch-when="i">
+                        <i>{{data[filed.dataKey]}}</i>
+                    </div>
+                    <div ng-switch-when="u">
+                        <u>{{data[filed.dataKey]}}</u>
+                    </div>
+                    <div ng-switch-when="p">
+                        <p>{{data[filed.dataKey]}}</p>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>

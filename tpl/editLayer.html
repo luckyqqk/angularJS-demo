@@ -1,0 +1,174 @@
+<div align="center">
+    <div id="layerModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="layerModalLabel" aria-hidden="true">
+        <div class="modal-header" align="center">
+            <h4 id="layerModalLabel">编辑layer</h4>
+            <a class="close" data-dismiss="modal" aria-hidden="true" >×</a>
+        </div>
+        <div class="modal-body">
+            <table class="table table-border table-bordered radius table-striped table-hover" align="center" ng-show="$layerOptions.showType == 1">
+                <tr>
+                    <td ng-repeat="option in $layerOptions.options" align="center">
+                        <b>{{option.label}}</b>
+                    </td>
+                </tr>
+                <tr ng-repeat="data in $layerOptions.data">
+                    <td ng-repeat="filed in $layerOptions.options" align="center">
+                        <div ng-switch="filed.htmlType">
+                            <div ng-switch-default="">
+                                <div>{{data[filed.dataKey]}}</div>
+                            </div>
+
+                            <div ng-switch-when="text">
+                                <input type="text" ng-model="data[filed.dataKey]"/>
+                            </div>
+
+                            <div ng-switch-when="textarea">
+                                <textarea ng-model="data[filed.dataKey]">{{data[filed.dataKey]}}</textarea>
+                            </div>
+
+                            <div ng-switch-when="email">
+                                <input type="email" ng-model="data[filed.dataKey]"/>
+                            </div>
+
+                            <div ng-switch-when="url">
+                                <input type="url" ng-model="data[filed.dataKey]"/>
+                            </div>
+
+                            <div ng-switch-when="checkbox">
+                                <label ng-repeat="box in filed.sonOptions">
+                                    {{box.name}}
+                                    <input type="checkbox" value="box.value"
+                                           ng-checked="isChecked($parent.data[filed.dataKey], box.value)"
+                                           ng-click="boxClick($parent.data[filed.dataKey], box.value)"
+                                            />
+                                </label>
+                            </div>
+
+                            <div ng-switch-when="radio">
+                                <div ng-repeat="sonRadio in filed.sonOptions">
+                                    <label> {{sonRadio.name}}
+                                        <input type="radio" ng-model="$parent.data[filed.dataKey]"
+                                               value="{{sonRadio.value}}"/>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!--暂不支持file-->
+                            <!--<div ng-switch-when="file">-->
+                            <!--<input type="file" ng-model="data[filed.dataKey]" />-->
+                            <!--</div>-->
+
+                            <div ng-switch-when="select">
+                                <select ng-model="data[filed.dataKey]"
+                                        ng-options="v.value as v.name for v in filed.sonOptions"></select>
+                            </div>
+                            <div ng-switch-when="b">
+                                <b>{{data[filed.dataKey]}}</b>
+                            </div>
+                            <div ng-switch-when="i">
+                                <i>{{data[filed.dataKey]}}</i>
+                            </div>
+                            <div ng-switch-when="u">
+                                <u>{{data[filed.dataKey]}}</u>
+                            </div>
+                            <div ng-switch-when="p">
+                                <p>{{data[filed.dataKey]}}</p>
+                            </div>
+
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <table class="table table-border table-bordered radius table-striped table-hover" align="center"
+                   ng-hide="$layerOptions.showType == 1">
+                <tr ng-repeat="filed in $layerOptions.options">
+                    <td align="center"><b>{{filed.label}}</b></td>
+                    <td ng-repeat="data in $layerOptions.data">
+                        <div ng-switch="filed.htmlType">
+                            <div ng-switch-default="">
+                                <div>{{data[filed.dataKey]}}</div>
+                            </div>
+
+                            <div ng-switch-when="text">
+                                <input type="text" ng-model="data[filed.dataKey]"/>
+                            </div>
+
+                            <div ng-switch-when="textarea">
+                                <textarea ng-model="data[filed.dataKey]">{{data[filed.dataKey]}}</textarea>
+                            </div>
+
+                            <div ng-switch-when="email">
+                                <input type="email" ng-model="data[filed.dataKey]"/>
+                            </div>
+
+                            <div ng-switch-when="url">
+                                <input type="url" ng-model="data[filed.dataKey]"/>
+                            </div>
+
+                            <div ng-switch-when="checkbox">
+                                <label ng-repeat="box in filed.sonOptions">
+                                    {{box.name}}
+                                    <input type="checkbox" value="box.value"
+                                           ng-checked="isChecked($parent.data[filed.dataKey], box.value)"
+                                           ng-click="boxClick($parent.data[filed.dataKey], box.value)"
+                                            />
+                                </label>
+                            </div>
+
+                            <div ng-switch-when="radio">
+                                <div ng-repeat="sonRadio in filed.sonOptions">
+                                    <label> {{sonRadio.name}}
+                                        <input type="radio" ng-model="$parent.data[filed.dataKey]"
+                                               value="{{sonRadio.value}}"/>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!--暂不支持file-->
+                            <!--<div ng-switch-when="file">-->
+                            <!--<input type="file" ng-model="data[filed.dataKey]" />-->
+                            <!--</div>-->
+
+                            <div ng-switch-when="select">
+                                <select ng-model="data[filed.dataKey]"
+                                        ng-options="v.value as v.name for v in filed.sonOptions"></select>
+                            </div>
+                            <div ng-switch-when="b">
+                                <b>{{data[filed.dataKey]}}</b>
+                            </div>
+                            <div ng-switch-when="i">
+                                <i>{{data[filed.dataKey]}}</i>
+                            </div>
+                            <div ng-switch-when="u">
+                                <u>{{data[filed.dataKey]}}</u>
+                            </div>
+                            <div ng-switch-when="p">
+                                <p>{{data[filed.dataKey]}}</p>
+                            </div>
+
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="modal-footer">
+            <span ng-repeat="btn in $layerOptions.buttons">
+                <span ng-switch="btn.colorType">
+                    <button ng-switch-default="" class=" btn radius btn-default" ng-click="clickButton($index)">{{btn.buttonName}}</button>
+                    <button ng-switch-when="1" class="btn radius btn-info" ng-click="clickButton($index)">{{btn.buttonName}}</button>
+                    <button ng-switch-when="2" class="btn radius btn-danger" ng-click="clickButton($index)">{{btn.buttonName}}</button>
+                    <button ng-switch-when="3" class="btn radius btn-success" ng-click="clickButton($index)">{{btn.buttonName}}</button>
+                    <button ng-switch-when="4" class="btn radius btn-primary" ng-click="clickButton($index)">{{btn.buttonName}}</button>
+                    <button ng-switch-when="5" class="btn radius btn-secondary" ng-click="clickButton($index)">{{btn.buttonName}}</button>
+                    <button ng-switch-when="6" class="btn radius btn-warning" ng-click="clickButton($index)">{{btn.buttonName}}</button>
+                </span>
+            </span>
+            <!--<span>-->
+                <!--<button class="btn radius btn-warning" ng-click="changeWise11()">翻转</button>-->
+            <!--</span>-->
+            <span>
+                <button class="btn radius" data-dismiss="modal" aria-hidden="true">关闭</button>
+            </span>
+        </div>
+    </div>
+</div>
